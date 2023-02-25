@@ -6,22 +6,11 @@
           Checklist
         </v-card-title>
         <v-card-text>
-          <v-row>
-            <v-btn
-              rounded
-              :color="currentFilter == 'pending' ? 'primary' : 'gray'"
-              class="mx-3"
-              @click="showList('pending')"
-            >Pending</v-btn>
-            <v-btn
-              rounded
-              :color="currentFilter == 'completed' ? 'primary' : 'gray'"
-              @click="showList('completed')"
-            >Completed</v-btn>
-          </v-row>
-        </v-card-text>
-        <v-card-text>
-            <div>
+            <v-row class="my-4 mx-2">
+              <filterbtn :currentfilter="currentFilter" @processFilter="showList" />
+            </v-row>
+            <v-row>
+              <v-col cols="12">
                 <v-checkbox
                     v-for="(item, i) in activeTodoList" :key="i"
                     v-model="item.completed"
@@ -30,7 +19,8 @@
                     :class="item.completed ? updatedClass : baseClass"
                 >
                 </v-checkbox>
-            </div>
+              </v-col>
+            </v-row>
         </v-card-text>
         <v-card-actions>
             <v-text-field
